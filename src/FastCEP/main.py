@@ -34,7 +34,6 @@ def consultar_cep(cep: str, db: Session = Depends(get_db)):
         return {
             "cep": logradouro.CEP,
             "logradouro": logradouro.descricao,
-            "tipo": logradouro.tipo,
             "bairro": logradouro.descricao_bairro,
             "cidade": logradouro.descricao_cidade
             or (cidade.descricao if cidade else None),
@@ -77,7 +76,6 @@ def consultar_cep(cep: str, db: Session = Depends(get_db)):
     # Insere o logradouro
     novo_logradouro = Logradouro(
         CEP=viacep_resp.get("cep", "").replace("-", ""),
-        tipo=None,  # ViaCEP não retorna tipo separado
         descricao=viacep_resp.get("logradouro"),
         id_cidade=cidade.id_cidade,
         UF=viacep_resp.get("uf"),
