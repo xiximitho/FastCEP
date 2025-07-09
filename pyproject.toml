@@ -1,5 +1,5 @@
 [project]
-name = "fastcep"
+name = "FastCEP"
 version = "0.1.0"
 description = ""
 authors = [
@@ -8,10 +8,13 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "fastapi (>=0.116.0,<0.117.0)",
+    "uvicorn (>=0.35.0,<0.36.0)",
+    "sqlalchemy (>=2.0.41,<3.0.0)"
 ]
 
 [tool.poetry]
-packages = [{include = "fastcep", from = "src"}]
+packages = [{include = "FastCEP", from = "src"}]
 
 
 [build-system]
