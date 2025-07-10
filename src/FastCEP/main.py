@@ -93,7 +93,6 @@ def consultar_cep(cep: str, db: Session = Depends(get_db)):
     return {
         "cep": viacep_resp.get("cep"),
         "logradouro": viacep_resp.get("logradouro"),
-        "tipo": None,
         "bairro": viacep_resp.get("bairro"),
         "cidade": viacep_resp.get("localidade"),
         "uf": viacep_resp.get("uf"),
