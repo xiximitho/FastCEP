@@ -25,19 +25,19 @@ def consultar_cep(cep: str, db: Session = Depends(get_db)):
 
     cep = cep.replace("-", "").replace(".", "").strip()
 
-    logradouro = db.query(Logradouro).filter(Logradouro.CEP == cep).first()
+    logradouro = db.query(Logradouro).filter(Logradouro.cep == cep).first()
     if logradouro:
         print("Logradouro encontrado na base de dados local")
         cidade = (
             db.query(Cidade).filter(Cidade.id_cidade == logradouro.id_cidade).first()
         )
         return {
-            "cep": logradouro.CEP,
+            "cep": logradouro.cep,
             "logradouro": logradouro.descricao,
             "bairro": logradouro.descricao_bairro,
             "cidade": logradouro.descricao_cidade
             or (cidade.descricao if cidade else None),
-            "uf": logradouro.UF,
+            "uf": logradouro.uf,
             "complemento": logradouro.complemento,
             "codigo_ibge": logradouro.codigo_cidade_ibge
             or (cidade.codigo_ibge if cidade else None),
@@ -75,10 +75,10 @@ def consultar_cep(cep: str, db: Session = Depends(get_db)):
 
     # Insere o logradouro
     novo_logradouro = Logradouro(
-        CEP=viacep_resp.get("cep", "").replace("-", ""),
+        cep=viacep_resp.get("cep", "").replace("-", ""),
         descricao=viacep_resp.get("logradouro"),
         id_cidade=cidade.id_cidade,
-        UF=viacep_resp.get("uf"),
+        uf=viacep_resp.get("uf"),
         complemento=viacep_resp.get("complemento"),
         descricao_sem_numero=viacep_resp.get("logradouro"),
         descricao_cidade=viacep_resp.get("localidade"),
@@ -105,4 +105,4 @@ def consultar_cep(cep: str, db: Session = Depends(get_db)):
 
 @app.get("/")
 def root():
-    return {"message": "CEP API funcionando!"}
+    return {"message": "FastCEP API funcionando!"}
