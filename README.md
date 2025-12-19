@@ -108,5 +108,5 @@ Resposta:
 Consulte o arquivo LICENSE para mais informações.
 
 ```shell
-docker run --name postgres-fastcep -e POSTGRES_DB=cep -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5440:5432 -v "$PWD/postgres-fast-cep:/var/lib/postgresql/data" -d postgres:17.7
+docker run --name postgres-fastcep --network fastcep-network -e POSTGRES_DB=cep -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5440:5432 -v "$PWD/postgres-fast-cep:/var/lib/postgresql/data" -d postgres:17.7
 ```

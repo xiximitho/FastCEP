@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  fastcep:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastcep-app
+    environment:
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/cep
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - fastcep-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  fastcep-network:
+    name: fastcep-network
+    driver: bridge
