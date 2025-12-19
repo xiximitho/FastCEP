@@ -18,17 +18,19 @@ Extraia os arquivos de inserção:
 ## Instalação e Execução.
 
 1. Instale as dependências do projeto:
-
     ```shell
-    poetry install
+    pip install pipenv
     ```
+   ```shell
+   pipenv install
+   ```
 2. Rodar a criação de tabelas.
     ```shell
    ./init_db_postgres.sh
    ```
 3. Inicie a aplicação:
     ```shell
-    poetry run uvicorn FastCEP.main:app --reload
+    pipenv run uvicorn src.FastCEP.main:app --reload
     ```
 
 ## DADOS
